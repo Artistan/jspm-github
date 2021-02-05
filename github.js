@@ -674,7 +674,8 @@ GithubLocation.prototype = {
             uri: archiveRes.headers.location,
             headers: {
               'accept': 'application/octet-stream',
-              'user-agent': 'jspm'
+              'user-agent': 'jspm',
+              'Authorization': 'token ' + authToken
             }
           }, self.defaultRequestOptions
           ))
