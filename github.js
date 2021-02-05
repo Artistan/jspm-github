@@ -33,9 +33,10 @@ catch(e) {}
 var execGit = require('./exec-git');
 
 function createRemoteStrings(auth, hostname) {
+  var authString = auth.username ? (encodeURIComponent(auth.username) + ':' + encodeURIComponent(auth.password) + '@') : '';
   hostname = hostname || 'github.com';
 
-  this.remoteString = 'https://' + hostname + '/';
+  this.remoteString = 'https://' + authString + hostname + '/';
   this.authToken = auth.token;
 
   if (hostname == 'github.com')
