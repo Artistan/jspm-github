@@ -272,11 +272,12 @@ function configureCredentials(config, ui) {
   });
 }
 
-function checkRateLimit(headers) {
-  if (headers.status.match(/^401/))
+function checkRateLimit(request) {
+  let headers = request.headers;
+  if (request.statusCode === 401)
     throw 'Unauthorized response for GitHub API.\n' +
       'Use %jspm registry config github% to reconfigure the credentials, or update them in your ~/.netrc file.';
-  if (headers.status.match(/^406/))
+  if (request.statusCode === 406)
     throw 'Unauthorized response for GitHub API.\n' +
       'If using an access token ensure it has public_repo access.\n' +
       'Use %jspm registry config github% to configure the credentials, or add them to your ~/.netrc file.';
@@ -453,7 +454,7 @@ GithubLocation.prototype = {
       }
     }, this.defaultRequestOptions
     )).then(function(res) {
-      var rateLimitResponse = checkRateLimit.call(this, res.headers);
+      var rateLimitResponse = checkRateLimit.call(this, res);
       if (rateLimitResponse)
         return rateLimitResponse;
 
@@ -659,7 +660,7 @@ GithubLocation.prototype = {
           followRedirect: false,
         }, self.defaultRequestOptions
         )).on('response', function(archiveRes) {
-          var rateLimitResponse = checkRateLimit.call(this, archiveRes.headers);
+          var rateLimitResponse = checkRateLimit.call(this, archiveRes);
           if (rateLimitResponse)
             return rateLimitResponse.then(resolve, reject);
 
@@ -750,7 +751,7 @@ GithubLocation.prototype = {
 
     return asp(request)(reqOptions)
     .then(function(res) {
-      var rateLimitResponse = checkRateLimit.call(this, res.headers);
+      var rateLimitResponse = checkRateLimit.call(this, res);
       if (rateLimitResponse)
         return rateLimitResponse;
       return Promise.resolve()
