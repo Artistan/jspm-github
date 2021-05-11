@@ -215,7 +215,7 @@ function configureCredentials(config, ui) {
       return ui.input('Enter your GitHub password or access token', null, true);
   })
   .then(function(password) {
-    auth.password = password;
+    auth.token = password;
     if (!auth.username)
       return false;
 
