@@ -215,7 +215,7 @@ function configureCredentials(config, ui) {
       return ui.input('Enter your GitHub password or access token', null, true);
   })
   .then(function(password) {
-    auth.token = password;
+    auth.password = password;
     if (!auth.username)
       return false;
 
@@ -235,7 +235,7 @@ function configureCredentials(config, ui) {
         headers: {
           'User-Agent': 'jspm',
           'Accept': 'application/vnd.github.v3+json',
-          'Authorization': 'token ' + auth.token
+          'Authorization': 'token ' + auth.password
         },
         followRedirect: false,
         strictSSL: 'strictSSL' in config ? config.strictSSL : true
