@@ -8,12 +8,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jspm/github.git"
+    "url": "https://github.com/Artistan/jspm-github.git"
   },
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jspm/github/issues"
+    "url": "https://github.com/Artistan/jspm-github/issues"
   },
   "dependencies": {
     "expand-tilde": "^1.2.0",
